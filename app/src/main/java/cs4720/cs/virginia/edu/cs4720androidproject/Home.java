@@ -50,10 +50,9 @@ public class Home extends AppCompatActivity implements LocationListener{
     @Override
     public void onLocationChanged(Location location) {
 
-        int latitude = (int) (location.getLatitude());
-        int longitude = (int) (location.getLongitude());
+        String str = "Latitude: "+location.getLatitude()+"Longitude: "+location.getLongitude();
 
-        Log.i("Geo_Location", "Latitude: " + latitude + ", Longitude: " + longitude);
+        Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
     }
 
     @Override
