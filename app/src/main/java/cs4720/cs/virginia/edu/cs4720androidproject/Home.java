@@ -4,25 +4,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.*;
 import android.widget.*;
 import android.location.*;
 import android.util.Log;
 import android.content.*;
 import com.google.android.*;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
+//basically everything comes from this: https://github.com/googlesamples/android-play-location/blob/master/BasicLocationSample/app/src/main/java/com/google/android/gms/location/sample/basiclocationsample/MainActivity.java
 
-public class Home extends AppCompatActivity implements LocationListener{
-    private LocationManager locationManager;
-
+public class Home extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+    private Button name;
+    private EditText textField;
+    private TextView texty;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
+    protected void onStart(){
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    }
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        name = (Button) findViewById(R.id.button);
+        textField = (EditText) findViewById(R.id.editText);
+        texty = (TextView) findViewById(R.id.textView2);
 
+    }
 
 
     @Override
@@ -34,41 +53,44 @@ public class Home extends AppCompatActivity implements LocationListener{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        TextView lat = (TextView) findViewById(R.id.mLatitudeText);
+        TextView lon = (TextView) findViewById(R.id.mLongitudeText);
+
+        if (mLastLocation != null) {
+            lat.setText(String.valueOf(mLastLocation.getLatitude()));
+            lon.setText(String.valueOf(mLastLocation.getLongitude()));
         }
+        else{
+            Toast.makeText(this, "Grr...location isn't working", Toast.LENGTH_LONG).show();
+        }
+    }
 
-        return super.onOptionsItemSelected(item);
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+        Toast.makeText(this, "This probably isn't Google Play's fault, but I'm blaming it, anyway", Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-
-        String str = "Latitude: "+location.getLatitude()+"Longitude: "+location.getLongitude();
-
-        Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Toast.makeText(this, "Grr...Google Play is being irritating...", Toast.LENGTH_LONG).show();
     }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
-
-    //Testing version control in Android Studio
 }
+
