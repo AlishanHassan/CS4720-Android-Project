@@ -7,17 +7,23 @@ import android.view.MenuItem;
 import android.view.*;
 import android.widget.*;
 import android.location.*;
+import android.util.Log;
+import android.content.*;
+import com.google.android.*;
 
-public class Home extends AppCompatActivity {
 
-    LocationManager locationManager;
-    LocationListener locationListener;
+public class Home extends AppCompatActivity implements LocationListener{
+    private LocationManager locationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,7 +47,29 @@ public class Home extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
 
+        int latitude = (int) (location.getLatitude());
+        int longitude = (int) (location.getLongitude());
+
+        Log.i("Geo_Location", "Latitude: " + latitude + ", Longitude: " + longitude);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 
     //Testing version control in Android Studio
 }
