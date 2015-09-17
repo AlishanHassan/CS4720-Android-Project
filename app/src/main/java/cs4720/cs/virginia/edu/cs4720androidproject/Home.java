@@ -9,6 +9,7 @@ import android.location.*;
 import android.util.Log;
 import android.content.*;
 import com.google.android.*;
+import android.view.*;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -17,15 +18,18 @@ import com.google.android.gms.location.LocationServices;
 //basically everything comes from this: https://github.com/googlesamples/android-play-location/blob/master/BasicLocationSample/app/src/main/java/com/google/android/gms/location/sample/basiclocationsample/MainActivity.java
 
 public class Home extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    private Button name;
+
+    private GoogleApiClient mGoogleApiClient;
+    private Button locationFinderButton;
     private EditText textField;
     private TextView texty;
-    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onStart(){
         super.onStart();
         mGoogleApiClient.connect();
+        Toast.makeText(this, "Yay, something worked", Toast.LENGTH_LONG).show();
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +41,29 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-        name = (Button) findViewById(R.id.button);
+        locationFinderButton = (Button) findViewById(R.id.button);
         textField = (EditText) findViewById(R.id.editText);
         texty = (TextView) findViewById(R.id.textView2);
+    //import view for the listener, geez
+        locationFinderButton.setOnClickListener(new View.OnClickListener() {
+                                    public void onClick(View v) {
+                                        texty.setText(textField.getText());
+                                        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+
+                                        TextView mLatitudeText = (TextView) findViewById(R.id.mLatitudeText);
+                                        TextView mLongitudeText = (TextView) findViewById(R.id.mLongitudeText);
+
+                                        if (mLastLocation != null) {
+                                            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+                                            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+                                        } else {
+                                            mLatitudeText.setText("You know where you are");
+                                            mLongitudeText.setText("You know where you are");
+                                        }
+                                    }
+                                }
+        );
 
     }
 
@@ -53,19 +77,19 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
 
-            return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
-
+//https://developers.google.com/android/guides/api-client#Starting
     @Override
     public void onConnected(Bundle connectionHint) {
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
