@@ -21,8 +21,10 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
 
     private GoogleApiClient mGoogleApiClient;
     private Button locationFinderButton;
+    private Button settingsButton;
     private EditText textField;
     private TextView texty;
+    public static TextView autocompleteText;
 
     @Override
     protected void onStart(){
@@ -44,6 +46,7 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
         locationFinderButton = (Button) findViewById(R.id.button);
         textField = (EditText) findViewById(R.id.editText);
         texty = (TextView) findViewById(R.id.textView2);
+        autocompleteText = (TextView) findViewById(R.id.textView5);
     //import view for the listener, geez
         locationFinderButton.setOnClickListener(new View.OnClickListener() {
                                     public void onClick(View v) {
@@ -63,7 +66,18 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
                                         }
                                     }
                                 }
+
         );
+
+
+        settingsButton = (Button)findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this, NewSettingsActivity.class));
+            }
+        });
+
 
     }
 
