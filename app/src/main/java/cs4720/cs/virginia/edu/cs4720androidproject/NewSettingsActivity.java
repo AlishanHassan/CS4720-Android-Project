@@ -16,7 +16,7 @@ public class NewSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_settings);
-         toggleAutocompleteButton= (Button)findViewById(R.id.autocompleteToggle);
+        toggleAutocompleteButton= (Button)findViewById(R.id.autocompleteToggle);
         toggleAutocompleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
