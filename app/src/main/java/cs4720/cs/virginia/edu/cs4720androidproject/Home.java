@@ -22,7 +22,8 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
 
     private GoogleApiClient mGoogleApiClient;
     private Button locationFinderButton;
-    private Button settingsButton;
+    //private Button settingsButton;
+    private Button aboutButton;
     private EditText textField;
     private TextView texty;
 
@@ -30,7 +31,7 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
     protected void onStart(){
         super.onStart();
         mGoogleApiClient.connect();
-        Toast.makeText(this, "Yay, something worked", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Yay, something worked", Toast.LENGTH_LONG).show();
 
     }
     @Override
@@ -71,6 +72,14 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
         );
         */
 
+
+        aboutButton = (Button)findViewById(R.id.aboutbutton);
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            startActivity(new Intent(Home.this, About.class));
+            }
+        });
 
       //  settingsButton = (Button)findViewById(R.id.settingsButton);
         //settingsButton.setOnClickListener(new View.OnClickListener() {
