@@ -55,6 +55,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cs4720.cs.virginia.edu.cs4720androidproject.Home" />
         </activity>
+        <activity
+            android:name=".AMissionsList"
+            android:label="@string/title_activity_amissions_list"
+            android:parentActivityName=".Home" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cs4720.cs.virginia.edu.cs4720androidproject.Home" />
+        </activity>
     </application>
 
 </manifest>

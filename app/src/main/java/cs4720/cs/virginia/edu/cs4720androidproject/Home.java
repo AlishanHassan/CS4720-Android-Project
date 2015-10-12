@@ -26,6 +26,8 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
     private Button aboutButton;
     private EditText textField;
     private TextView texty;
+    private Button availableMissionsButton;
+    private static int MISSION_REQUEST = 1;
 
     @Override
     protected void onStart(){
@@ -78,6 +80,17 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
             @Override
             public void onClick(View v) {
             startActivity(new Intent(Home.this, About.class));
+            }
+        });
+
+        availableMissionsButton = (Button)findViewById(R.id.availablemissionsbutton);
+        availableMissionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newMissionIntent = new Intent(Home.this, AMissionsList.class);
+                startActivityForResult(newMissionIntent, MISSION_REQUEST);
+                String mission = getIntent().getStringExtra("NEW_MISSION");
+                Toast.makeText(getBaseContext(), mission, Toast.LENGTH_LONG).show();
             }
         });
 
