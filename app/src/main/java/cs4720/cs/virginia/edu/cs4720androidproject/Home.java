@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.OrientationEventListener;
 import android.widget.*;
 import android.location.*;
 import android.util.Log;
@@ -24,7 +25,6 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
     private Button settingsButton;
     private EditText textField;
     private TextView texty;
-    public static TextView autocompleteText;
 
     @Override
     protected void onStart(){
@@ -43,40 +43,42 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-        locationFinderButton = (Button) findViewById(R.id.button);
-        textField = (EditText) findViewById(R.id.editText);
+        //locationFinderButton = (Button) findViewById(R.id.button);
+        //textField = (EditText) findViewById(R.id.editText);
         texty = (TextView) findViewById(R.id.textView2);
-        autocompleteText = (TextView) findViewById(R.id.textView5);
     //import view for the listener, geez
+
+        /*
         locationFinderButton.setOnClickListener(new View.OnClickListener() {
-                                    public void onClick(View v) {
-                                        texty.setText(textField.getText());
-                                        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                                                    public void onClick(View v) {
+                                                        texty.setText(textField.getText());
+                                                        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
 
-                                        TextView mLatitudeText = (TextView) findViewById(R.id.mLatitudeText);
-                                        TextView mLongitudeText = (TextView) findViewById(R.id.mLongitudeText);
+                                                        TextView mLatitudeText = (TextView) findViewById(R.id.mLatitudeText);
+                                                        TextView mLongitudeText = (TextView) findViewById(R.id.mLongitudeText);
 
-                                        if (mLastLocation != null) {
-                                            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-                                            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-                                        } else {
-                                            mLatitudeText.setText("You know where you are");
-                                            mLongitudeText.setText("You know where you are");
-                                        }
-                                    }
-                                }
+                                                        if (mLastLocation != null) {
+                                                            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+                                                            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+                                                        } else {
+                                                            mLatitudeText.setText("You know where you are");
+                                                            mLongitudeText.setText("You know where you are");
+                                                        }
+                                                    }
+                                                }
 
         );
+        */
 
 
-        settingsButton = (Button)findViewById(R.id.settingsButton);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Home.this, NewSettingsActivity.class));
-            }
-        });
+      //  settingsButton = (Button)findViewById(R.id.settingsButton);
+        //settingsButton.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+            //public void onClick(View v) {
+              //  startActivity(new Intent(Home.this, NewSettingsActivity.class));
+            //}
+        //});
 
 
     }
@@ -130,5 +132,7 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Toast.makeText(this, "Grr...Google Play is being irritating...", Toast.LENGTH_LONG).show();
     }
+
+
 }
 
