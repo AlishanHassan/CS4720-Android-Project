@@ -21,6 +21,7 @@ import com.google.android.gms.location.LocationServices;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.lang.Math;
 
 public class AMissionsList extends AppCompatActivity {
 
@@ -55,10 +56,23 @@ public class AMissionsList extends AppCompatActivity {
             50000,
             10000
     };
-    private String[] missionCoordinates = {"test",
-            "more test"
+    private String[] missionCoordinates = {"27.9881,86.9253",
+            "38.0456989,-78.510402",
+            "37.9916772,-78.4736202",
+            "38.0335571,-78.5101605",
+            "38.0363182,-78.5099734",
+            "38.0299486,-78.4809297",
+            "38.0382902,-78.5051853",
+            "37.2283886,-80.4256",
+            "38.031459,-78.5151362",
+            "48.8606146,2.3354607",
+            "38.0314226,-78.5109111",
+            "38.0086085,-78.4553827",
+            "43.0540984,-79.2277753",
+            "37.8199328,-122.4804384",
+            "38.8855611,-77.0338853"
     };
-    
+
     private int totalScore;
     private List<String[]> activeMissionsList;
     private ListView missionsView;
@@ -87,6 +101,7 @@ public class AMissionsList extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
                 missions_list);
+
         missionsView.setAdapter(arrayAdapter);
 
         missionsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,18 +111,18 @@ public class AMissionsList extends AppCompatActivity {
 
                 String tempPoints;
 
-                String[] currCoordinateSplit = currentCoordinates.split(",");
-                double currLatitude = Double.parseDouble(currCoordinateSplit[0]);
-                double currLongitude = Double.parseDouble(currCoordinateSplit[1]);
-
-
-
-
-
                 String value = (String) adapter.getItemAtPosition(position);
-                Intent choiceIntent = new Intent(getBaseContext(), Home.class);
-                choiceIntent.putExtra("NEW_MISSION", value);
-                startActivity(choiceIntent);
+
+                //Toast.makeText(this, value, Toast.LENGTH_LONG).show();
+                if(accomplished(position)){
+                    Toast.makeText(AMissionsList.this, "Mission accomplished", Toast.LENGTH_LONG).show();
+
+                    Intent choiceIntent = new Intent(getBaseContext(), Home.class);
+                    choiceIntent.putExtra("NEW_MISSION", value);
+                    startActivity(choiceIntent);
+                }
+
+
 
                 //Home.autocompleteText.setText("Autocomplete missions off");
             }
@@ -138,4 +153,32 @@ public class AMissionsList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    public boolean accomplished(int missionNumber)
+    {
+        String currentCoordinates = Home.getCoordinates();
+        String[] currCoordinateSplit = currentCoordinates.split(",");
+        double currLatitude = Double.parseDouble(currCoordinateSplit[0]);
+        double currLongitude = Double.parseDouble(currCoordinateSplit[1]);
+
+        String[] tempMissionCoordinates = missionCoordinates[missionNumber].split(",");
+
+        double missionLatitude = Double.parseDouble(tempMissionCoordinates[0]);
+        double missionLongitude = Double.parseDouble(tempMissionCoordinates[1]);
+
+
+        double latDiff = currLatitude - missionLatitude;
+        double longDiff = currLongitude - missionLongitude;
+
+
+        Toast.makeText(this, latDiff + " " + longDiff, Toast.LENGTH_LONG).show();
+
+        if((latDiff <= .0005 && latDiff >= -.0005) && (longDiff <= .0005 && longDiff >= -.0005))
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

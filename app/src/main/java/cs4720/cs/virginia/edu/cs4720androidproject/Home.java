@@ -56,7 +56,7 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
         //locationFinderButton = (Button) findViewById(R.id.button);
         //textField = (EditText) findViewById(R.id.editText);
         texty = (TextView) findViewById(R.id.textView2);
-    //import view for the listener, geez
+        //import view for the listener, geez
 
         /*
         locationFinderButton.setOnClickListener(new View.OnClickListener() {
