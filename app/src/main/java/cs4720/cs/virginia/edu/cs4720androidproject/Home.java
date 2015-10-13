@@ -23,18 +23,20 @@ import java.io.FileInputStream;
 public class Home extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient mGoogleApiClient;
-    private Button locationFinderButton;
+    private Button cMissionsButton;
     //private Button settingsButton;
     private Button aboutButton;
     private EditText textField;
     private TextView texty;
     private TextView lat;
     private TextView lon;
+    private static TextView scoreView;
     public static double latitude;
     public static double longitude;
     private Button availableMissionsButton;
     private static int MISSION_REQUEST = 1;
     private Location mLastLocation;
+    private int score;
 
     @Override
     protected void onStart(){
@@ -84,14 +86,13 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
 
 
         String FILENAME = "scores_file";
-        TextView scoreView = (TextView) findViewById(R.id.scoreView);
-
+        scoreView = (TextView) findViewById(R.id.scoreView);
         try {
             FileInputStream fis = openFileInput(FILENAME);
             StringBuilder builder = new StringBuilder();
             int ch;
-            while((ch = fis.read()) != -1){
-                builder.append((char)ch);
+            while((ch = fis.read()) != -1) {
+                builder.append((char) ch);
             }
             scoreView.setText(builder);
             fis.close();
@@ -115,10 +116,17 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
                 Intent newMissionIntent = new Intent(Home.this, AMissionsList.class);
                 startActivityForResult(newMissionIntent, MISSION_REQUEST);
                 String mission = getIntent().getStringExtra("NEW_MISSION");
-                Toast.makeText(getBaseContext(), mission, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), mission, Toast.LENGTH_LONG).show();
             }
         });
 
+        cMissionsButton = (Button) findViewById(R.id.completedmissionsbutton);
+        cMissionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this, CompletedMissions.class));
+            }
+        });
       //  settingsButton = (Button)findViewById(R.id.settingsButton);
         //settingsButton.setOnClickListener(new View.OnClickListener() {
           //  @Override
@@ -186,6 +194,12 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
     public static String getCoordinates()
     {
         String blah = latitude + "," + longitude;
+        return blah;
+    }
+
+    public static String getScore()
+    {
+        String blah = scoreView.getText().toString();
         return blah;
     }
 }

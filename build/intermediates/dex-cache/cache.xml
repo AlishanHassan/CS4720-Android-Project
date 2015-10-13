@@ -2,193 +2,193 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.8.0\jars\classes.jar"
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.8.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="2e24e5f1b11170163028277de63f709e42525db4">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-71d7b110372c444921369ba3540b913bfd14294c.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.0\support-annotations-23.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.0-c87ffe17eb35861faae469286079bbccb70a019d.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="4a135d56554069e5d0ff80e3220e887e57146ee5">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-371717217a26cf7121cdda88925550f815e2b994.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="c5cafb324568d954780abb858c25db7ce675ab3c">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-cbfd89bbbc939d0dbbb054ad0bd8bd605f8c4124.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="77a9dcb5f8b1dba36aacaa9c150eb0942dbea158">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-a98644efa3d5a11617afc5cca8e698e49e9cee01.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="d11330ea68c0d964d30d5caed1f27e6b1488b189">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-165a634604fc5262bcbb2e9ecb62e1236fe143da.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="6e85edfc9b5346d216e50ccef1f8e825504144a3">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-6a5a603fbb097c8f109176560a57af11562eecb9.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="edea92852b40eee716e910af8dad9eeaa58fb0e1">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-33e591a1d343ecc8c2d3b3fc2ab505655f49dbbd.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-4a86d3e68c6052dbd1d4a9ba634b3eb2e639d6cc.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="166e458ee3b5fb5fcff0f936df3f3a788e6c54f3">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-a694acd2eafe60144b897320af9d2fd8a4276aa0.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\libs\internal_impl-23.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.0-ab87d96074e14728a2424919ba9b1cc77312cde3.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="e23ea11124bb700eeddd4ab7aa848c615f493850">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-6338cc2d7dc7c34d361c97ec3754df4d138e0504.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="42a1ee578b62fd1bd28b3307a679dc9ba0791587">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-ff9561d36a7183964daa0d85bd2e65ad914fa8d2.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\libs\internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-24917e31c59bcbf0f2eaba4f4cb713d1c0b6d85a.jar" />
+        sha1="2491ae1b2a848af1f4f0c795f3117c1bd6a1989f">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-a33dc27aad3f3886e29268d8f45169b822c0f0a2.jar" />
     </item>
     <item
         jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.8.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="adebe28e0c0c05d34a3bfd76f3275bf4d8ff87b6">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-b04bb5ae27855917c82cb7c26bc3d85116481204.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="2491ae1b2a848af1f4f0c795f3117c1bd6a1989f">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-a33dc27aad3f3886e29268d8f45169b822c0f0a2.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="0124ce31248c0e8acfa2b28283c6d1a4d76e73d2">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-38714004357a391e94b4d56b3aafabb0bb0b409d.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-7e4810ae3d62f25438bd6481d0a5b6ebf17a6dae.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="b99f0b78bbcb76b915bc6529a83b65d4d46990dd">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-b73e52d0176feebf33736442f862cc56dbb2c236.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="cb6fab7a71fa9ec1f483d44c5fca65ab469d8aca">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-eece9086c85b5a90e37b44479e394a5f8bf5493e.jar" />
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-b04bb5ae27855917c82cb7c26bc3d85116481204.jar" />
     </item>
     <item
         jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="4fcf0b1879f8caf497c073e1432d398e9e2988c1">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-7dccc5e0067ee4b391d330142d39d71f8ea0d121.jar" />
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-7dccc5e0067ee4b391d330142d39d71f8ea0d121.jar" />
     </item>
     <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.8.0\jars\classes.jar"
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.8.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="130b32ed466fa0f63efd4c7d6250ccd2ed506790">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-bacd44dccd6a4a73ed6de717e3b738516a6749dc.jar" />
+        sha1="d11330ea68c0d964d30d5caed1f27e6b1488b189">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-165a634604fc5262bcbb2e9ecb62e1236fe143da.jar" />
     </item>
     <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.8.0\jars\classes.jar"
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.8.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="c2ac04c5b232f6f0658ee4f1c13be09cd76406e2">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-b5aac4e4131085ca2e99b8f774ab16be80b40b48.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-a34e497af91d12baf3bf0679e8a0f99a8cdf125b.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="1ff30fa49c07a08c3035d7218a3efebf5680d522">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-155f07028d328920ab3498264eea1c3b19ca9fb7.jar" />
-    </item>
-    <item
-        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.8.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="98137c4d12c50923f5809852b1ef4d1c4e162081">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-2fd2cdd044aba54da68e2b8cb5b72d7633af248f.jar" />
+        sha1="c5cafb324568d954780abb858c25db7ce675ab3c">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-cbfd89bbbc939d0dbbb054ad0bd8bd605f8c4124.jar" />
     </item>
     <item
         jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.8.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="c756d14e99d39471e99013a1e8fd2f3813ed42bf">
-        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\debug\classes-999d4df3625691653819d24817051158a412bcd9.jar" />
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-999d4df3625691653819d24817051158a412bcd9.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-7e4810ae3d62f25438bd6481d0a5b6ebf17a6dae.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="6e85edfc9b5346d216e50ccef1f8e825504144a3">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-6a5a603fbb097c8f109176560a57af11562eecb9.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="e23ea11124bb700eeddd4ab7aa848c615f493850">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-6338cc2d7dc7c34d361c97ec3754df4d138e0504.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="0124ce31248c0e8acfa2b28283c6d1a4d76e73d2">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-38714004357a391e94b4d56b3aafabb0bb0b409d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\libs\internal_impl-23.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\internal_impl-23.0.0-ab87d96074e14728a2424919ba9b1cc77312cde3.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="2e24e5f1b11170163028277de63f709e42525db4">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-71d7b110372c444921369ba3540b913bfd14294c.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-4a86d3e68c6052dbd1d4a9ba634b3eb2e639d6cc.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="edea92852b40eee716e910af8dad9eeaa58fb0e1">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-33e591a1d343ecc8c2d3b3fc2ab505655f49dbbd.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-a34e497af91d12baf3bf0679e8a0f99a8cdf125b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="1ff30fa49c07a08c3035d7218a3efebf5680d522">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-155f07028d328920ab3498264eea1c3b19ca9fb7.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.0\support-annotations-23.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\support-annotations-23.0.0-c87ffe17eb35861faae469286079bbccb70a019d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="b99f0b78bbcb76b915bc6529a83b65d4d46990dd">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-b73e52d0176feebf33736442f862cc56dbb2c236.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\internal_impl-22.2.0-24917e31c59bcbf0f2eaba4f4cb713d1c0b6d85a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="77a9dcb5f8b1dba36aacaa9c150eb0942dbea158">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-a98644efa3d5a11617afc5cca8e698e49e9cee01.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="c2ac04c5b232f6f0658ee4f1c13be09cd76406e2">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-b5aac4e4131085ca2e99b8f774ab16be80b40b48.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="166e458ee3b5fb5fcff0f936df3f3a788e6c54f3">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-a694acd2eafe60144b897320af9d2fd8a4276aa0.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="cb6fab7a71fa9ec1f483d44c5fca65ab469d8aca">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-eece9086c85b5a90e37b44479e394a5f8bf5493e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="130b32ed466fa0f63efd4c7d6250ccd2ed506790">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-bacd44dccd6a4a73ed6de717e3b738516a6749dc.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="42a1ee578b62fd1bd28b3307a679dc9ba0791587">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-ff9561d36a7183964daa0d85bd2e65ad914fa8d2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="98137c4d12c50923f5809852b1ef4d1c4e162081">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-2fd2cdd044aba54da68e2b8cb5b72d7633af248f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="4a135d56554069e5d0ff80e3220e887e57146ee5">
+        <dex dex="C:\Users\Alishan\Documents\UVA\CS\CS4720\CS4720AndroidProject\app\build\intermediates\pre-dexed\release\classes-371717217a26cf7121cdda88925550f815e2b994.jar" />
     </item>
 
 </items>
