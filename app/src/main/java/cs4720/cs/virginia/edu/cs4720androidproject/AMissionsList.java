@@ -19,6 +19,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import org.json.*;
+import java.io.*;
+import org.apache.http.*;
+
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -276,6 +280,20 @@ public class AMissionsList extends AppCompatActivity {
         double missionLatitude = Double.parseDouble(tempMissionCoordinates[0]);
         double missionLongitude = Double.parseDouble(tempMissionCoordinates[1]);
 
+        String wunderURL = "http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/" + missionLatitude + "," + missionLatitude + ".json";
+
+
+
+        try {
+            JSONObject reader = new JSONObject(wunderURL);
+            String weather = reader.getString("weather");
+            Toast.makeText(this, weather, Toast.LENGTH_LONG).show();
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+            System.out.println("failure");
+        }
 
         double latDiff = currLatitude - missionLatitude;
         double longDiff = currLongitude - missionLongitude;
