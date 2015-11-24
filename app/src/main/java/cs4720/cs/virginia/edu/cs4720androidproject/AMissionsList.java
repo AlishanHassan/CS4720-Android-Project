@@ -20,10 +20,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import org.json.*;
+import java.net.HttpURLConnection;
+import java.net.*;
+
 import java.io.*;
 import org.apache.http.*;
-
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Arrays;
@@ -31,7 +32,40 @@ import java.util.LinkedList;
 import java.util.List;
 import java.lang.Math;
 
+
+
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.Scanner;
+
 public class AMissionsList extends AppCompatActivity {
+
+
+    final String WUNDERGROUND_API_KEY = "4d7b89426d7d4eb2";
+    final String WUNDERGROUND_URL = "http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/";
+    final String WUNDERGROUND_URL_TEST = "http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/37.776289,-122.395234.json";
+    final String WUNDERGROUND_URL_EXT = ".json";
+    //http://api.wunderground.com/api/542e792185b9e21f/conditions/q/CA/San_Francisco.json
+    //http://api.wunderground.com/api/542e792185b9e21f/conditions/q/37.776289,-122.395234.json
+    //http://www.wunderground.com/cgi-bin/findweather/getForecast?query=37.773285,-122.417725
+    final int CONNECTION_TIMEOUT = 0;
+    final int DATARETRIEVAL_TIMEOUT = 0;
+    final String CLASS_NAME = this.getClass().getName();
+    ProgressDialog message;
+    private WeatherDownloader weatherDownloader;
+    private JSONObject weatherJSON;
 
     private String[] missions_list = {"Scale Mount Everest - 1000000 XP",
             "Get Bagels - 1000 XP",
@@ -280,11 +314,54 @@ public class AMissionsList extends AppCompatActivity {
         double missionLatitude = Double.parseDouble(tempMissionCoordinates[0]);
         double missionLongitude = Double.parseDouble(tempMissionCoordinates[1]);
 
-        String wunderURL = "http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/" + missionLatitude + "," + missionLatitude + ".json";
+
+        
+/*
+        try{
+        JSONObject reader = getWundergroundWeatherForecast(missionLatitude,missionLongitude);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+            System.out.println("failure");
+        }
+*/
 
 
-
+    /*
         try {
+            String wunderURL = "http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/" + missionLatitude + "," + missionLatitude + ".json";
+            URL url = new URL(wunderURL);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            try {
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                //readStream(in);
+                JSONObject reader = new JSONObject(wunderURL);
+                String weather = reader.getString("weather");
+                Toast.makeText(this, weather, Toast.LENGTH_LONG).show();
+            }
+            finally{
+                        urlConnection.disconnect();
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("blah");
+        }
+*/
+
+
+
+
+
+
+
+
+        /*
+        try {
+
             JSONObject reader = new JSONObject(wunderURL);
             String weather = reader.getString("weather");
             Toast.makeText(this, weather, Toast.LENGTH_LONG).show();
@@ -294,6 +371,7 @@ public class AMissionsList extends AppCompatActivity {
             e.printStackTrace();
             System.out.println("failure");
         }
+*/
 
         double latDiff = currLatitude - missionLatitude;
         double longDiff = currLongitude - missionLongitude;
@@ -309,4 +387,70 @@ public class AMissionsList extends AppCompatActivity {
             return false;
         }
     }
+
+
+    public JSONObject getWundergroundWeatherForecast(double latitude, double longitude) {
+        Log.i("GetWundergroundWeather", "Going to fetch weather");
+        weatherDownloader = new WeatherDownloader();
+        weatherDownloader.execute(String.valueOf(latitude),String.valueOf(longitude));
+        return weatherJSON;
+    }
+
+    private static String getWeatherResponseText(InputStream inputStream) {
+        return new Scanner(inputStream).useDelimiter("\\A").next();
+    }
+
+    private class WeatherDownloader extends AsyncTask<String, Integer, JSONObject> {
+        ProgressDialog message;
+        InputStream inputStream = null;
+        HttpURLConnection urlConnection = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            Log.i("WeatherDownloader", "Going to fetch weather");
+            publishProgress(1);
+            try {
+                URL url = new URL(WUNDERGROUND_URL+params[0]+","+params[1]+WUNDERGROUND_URL_EXT);
+                urlConnection = (HttpURLConnection) url.openConnection();
+
+                if (urlConnection.getResponseCode() != 200) {
+                    throw new Exception("Failed to connect");
+                }
+
+                inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                weatherJSON = new JSONObject(getWeatherResponseText(inputStream));
+                return weatherJSON;
+
+            } catch (MalformedURLException malExp) {
+                Log.e(CLASS_NAME, "URL is incorrect");
+            } catch (ProtocolException proExp) {
+                Log.e(CLASS_NAME, "Website down");
+            } catch (IOException ioExp) {
+                Log.e(CLASS_NAME, "Could not read in any JSON");
+
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            } finally {
+                try {
+                    inputStream.close();
+                } catch (Throwable throwable){}
+                try {
+                    urlConnection.disconnect();
+                } catch (Throwable throwable){}
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            Log.i("WeatherDownloader", "Weather was fetched");
+        }
+    }
+
 }
