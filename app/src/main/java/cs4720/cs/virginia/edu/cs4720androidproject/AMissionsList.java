@@ -22,7 +22,9 @@ import com.google.android.gms.location.LocationServices;
 import org.json.*;
 import java.net.HttpURLConnection;
 import java.net.*;
-
+import android.os.Message;
+import android.os.Messenger;
+import android.os.*;
 import java.io.*;
 import org.apache.http.*;
 import java.io.FileInputStream;
@@ -53,33 +55,43 @@ import java.util.Scanner;
 public class AMissionsList extends AppCompatActivity {
 
 
-    final String WUNDERGROUND_API_KEY = "4d7b89426d7d4eb2";
-    final String WUNDERGROUND_URL = "http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/";
-    final String WUNDERGROUND_URL_TEST = "http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/37.776289,-122.395234.json";
-    final String WUNDERGROUND_URL_EXT = ".json";
+    public static final String WUNDERGROUND_API_KEY = "4d7b89426d7d4eb2";
+    public static final String WUNDERGROUND_URL = "http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/";
+    public static final String WUNDERGROUND_URL_TEST = "http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/37.776289,-122.395234.json";
+    public static final String WUNDERGROUND_URL_EXT = ".json";
+    public String weatherString = "test";
+    public double daLatitude, daLongitude;
     //http://api.wunderground.com/api/542e792185b9e21f/conditions/q/CA/San_Francisco.json
     //http://api.wunderground.com/api/542e792185b9e21f/conditions/q/37.776289,-122.395234.json
     //http://www.wunderground.com/cgi-bin/findweather/getForecast?query=37.773285,-122.417725
+    public static final String CONDITION = "weather";
+    public static final String TEMP_F = "temp_f";
     final int CONNECTION_TIMEOUT = 0;
     final int DATARETRIEVAL_TIMEOUT = 0;
     final String CLASS_NAME = this.getClass().getName();
     ProgressDialog message;
-    private WeatherDownloader weatherDownloader;
+    //private WeatherDownloader weatherDownloader;
     private JSONObject weatherJSON;
 
-    private String[] missions_list = {"Scale Mount Everest - 1000000 XP",
-            "Get Bagels - 1000 XP",
+
+
+
+
+
+
+    private String[] missions_list = {"Scale Mount Everest without Freezing too Badly - 1000000 XP",
+            "Protect your Bagels from the Rain - 1000 XP",
             "Pick Apples - 5000 XP",
             "Visit the Rotunda - 2000 XP",
             "Attend Class in Clark - 1000 XP",
             "Go Downtown - 3000 XP",
             "Check Out the Fralin - 3000 XP",
-            "Head to Tech - 1 XP",
-            "Watch a Football Game - 2000 XP",
-            "See the Mona Lisa - 100000 XP",
-            "Meet THE Professor Sherriff - 5000000 XP",
-            "Tour Monticello - 5000 XP",
-            "See Niagara Falls - 20000 XP",
+            "Head to Tech as Armageddon Rises - 1 XP",
+            "It's a Nice Day to Watch a Football Game - 2000 XP",
+            "See the Mona Lisa in Typical British Weather- 100000 XP",
+            "Rain or Shine, Meet THE Professor Sherriff - 5000000 XP",
+            "On a day hotter than Death Valley, Tour Monticello - 5000 XP",
+            "On a bright Canadian Day, See Niagara Falls - 20000 XP",
             "The Golden Gate Bridge? - 50000 XP",
             "A Trip To The National Mall - 10000 XP"};
     private int[] points = {1000000,
@@ -113,6 +125,23 @@ public class AMissionsList extends AppCompatActivity {
             "43.0540984,-79.2277753",
             "37.8199328,-122.4804384",
             "38.8855611,-77.0338853"
+    };
+    private String[] missionConditions = {"32,NULL",
+            "666,Rain",
+            "666,NULL",
+            "666,NULL",
+            "666,NULL",
+            "666,Drizzle",
+            "666,NULL",
+            "0,Thunderstorm",
+            "666,Partly Cloudy",
+            "666,Overcast",
+            "666,NULL",
+            "144,NULL",
+            "666,SUNNY",
+            "666,NULL",
+            "666,NULL",
+
     };
 
     private int totalScore;
@@ -315,7 +344,52 @@ public class AMissionsList extends AppCompatActivity {
         double missionLongitude = Double.parseDouble(tempMissionCoordinates[1]);
 
 
-        
+        String[] tempMissionConditions = missionConditions[missionNumber].split(",");
+        Double missionTemp = Double.parseDouble(tempMissionConditions[0]);
+        String missionCond = tempMissionConditions[1];
+
+        System.out.println("temp mission stuff: " + missionTemp + " " + missionCond);
+
+        daLatitude = missionLatitude;
+        daLongitude = missionLongitude;
+
+        getWeatherFromInterenet("hi");
+
+
+        try {
+            Thread.sleep(2000);                 //1000 milliseconds is one second.
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+
+        //System.out.println("the weather string: " + weatherString);
+        String[] weatherData = weatherString.split(",");
+        double theTemp = Double.parseDouble(weatherData[0]);
+        String theConditions = weatherData[1];
+        System.out.println("temp: " + theTemp + " cond: " + theConditions);
+
+
+        double latDiff = currLatitude - missionLatitude;
+        double longDiff = currLongitude - missionLongitude;
+
+
+        //Toast.makeText(this, latDiff + " " + longDiff, Toast.LENGTH_LONG).show();
+
+        if((latDiff <= .0005 && latDiff >= -.0005) && (longDiff <= .0005 && longDiff >= -.0005)
+                && (missionTemp == theTemp || missionTemp == 666)
+              && (missionCond.equals(theConditions) || missionCond.equals("NULL"))
+                )
+        {
+            System.out.println("conditions met!");
+            return true;
+        }
+        else {
+            System.out.println("conditions not met");
+            Toast.makeText(AMissionsList.this, "YOU FAILED", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+
 /*
         try{
         JSONObject reader = getWundergroundWeatherForecast(missionLatitude,missionLongitude);
@@ -373,22 +447,10 @@ public class AMissionsList extends AppCompatActivity {
         }
 */
 
-        double latDiff = currLatitude - missionLatitude;
-        double longDiff = currLongitude - missionLongitude;
 
-
-        //Toast.makeText(this, latDiff + " " + longDiff, Toast.LENGTH_LONG).show();
-
-        if((latDiff <= .0005 && latDiff >= -.0005) && (longDiff <= .0005 && longDiff >= -.0005))
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 
-
+/*
     public JSONObject getWundergroundWeatherForecast(double latitude, double longitude) {
         Log.i("GetWundergroundWeather", "Going to fetch weather");
         weatherDownloader = new WeatherDownloader();
@@ -451,6 +513,82 @@ public class AMissionsList extends AppCompatActivity {
             super.onPostExecute(jsonObject);
             Log.i("WeatherDownloader", "Weather was fetched");
         }
+    }*/
+
+
+
+
+
+
+
+
+
+    void getWeatherFromInterenet(final String location){
+
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    String temperature = "", condition = "";
+                    URL url;
+                    try {
+                        System.out.println(location);
+                        System.out.println("Coordinates " + daLatitude + "," + daLongitude);
+
+                        url = new URL("http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/" + daLatitude + "," + daLongitude + ".json");
+                        System.out.println("URL: " + url);
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setDoInput(true);
+                        connection.connect();
+                        //wait(2000);
+                        InputStream input = connection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                        String oneLineFromInternet;
+                        String wholeReplyFromInternet = "";
+                        while ((oneLineFromInternet = reader.readLine()) != null) {
+                            wholeReplyFromInternet += oneLineFromInternet + " ";
+                        }
+                        JSONObject jsonObject = new JSONObject(wholeReplyFromInternet);
+                        JSONObject current_observation = jsonObject.getJSONObject("current_observation");
+                        temperature = current_observation.getString(TEMP_F);
+                        condition = current_observation.getString(CONDITION);
+                        weatherString = temperature + "," + condition;
+
+                        System.out.println(weatherString);
+                    }
+                    catch (JSONException | IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        });
+
+        thread.start();
+
     }
+
+
+
+    /*
+    void sendWeatherToClient(String actualWeatherString) {
+        Bundle reply = new Bundle();
+        reply.putString("weather", actualWeatherString);
+        Message replyMessage = Message.obtain();
+        replyMessage.setData(reply);
+        try {
+            messengerToClient.send(replyMessage);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+    */
+
+
 
 }
