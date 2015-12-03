@@ -32,9 +32,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Version 1.0"
+        android:text="Version 1.2"
         android:id="@+id/versionnumber"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Your location information is gathered. That&apos;s kind of the point. This information is used by Mission  Quest to determine if you&apos;ve fulfilled the requirements of a given mission. We, the overlords, don&apos;t  keep any of this data, everything is stored locally. Even if we did collect data we would only use  it to mock your incompetence. However, because location data requires Google Play Services, Google  will be getting your location information. They will probably use it for nefarious purposes. You  have been warned. "
+        android:id="@+id/privacyPolicyText"
+        android:layout_below="@+id/privacyPolicyHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Privacy Policy"
+        android:id="@+id/privacyPolicyHeader"
+        android:layout_below="@+id/Description"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="42dp"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>
