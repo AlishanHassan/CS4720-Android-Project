@@ -7,7 +7,42 @@
     android:background="#1234EF"
     tools:context="cs4720.cs.virginia.edu.cs4720androidproject.Dashboard">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Dashboard"
+        android:id="@+id/dashboardView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Current Location"
+        android:id="@+id/currentLocation"
+        android:layout_marginTop="78dp"
+        android:layout_below="@+id/dashboardView"
+        android:layout_toLeftOf="@+id/dashboardView"
+        android:layout_toStartOf="@+id/dashboardView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Latitude"
+        android:id="@+id/latitudeView"
+        android:layout_alignTop="@+id/currentLocation"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Longitude"
+        android:id="@+id/longitudeView"
+        android:layout_alignTop="@+id/latitudeView"
+        android:layout_toRightOf="@+id/dashboardView"
+        android:layout_toEndOf="@+id/dashboardView" />
 </RelativeLayout>
