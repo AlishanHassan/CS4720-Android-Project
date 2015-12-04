@@ -22,14 +22,14 @@
         android:shadowDy="0"
         android:shadowRadius="5"
         android:layout_marginBottom="33dp"
-        android:layout_above="@+id/completedmissionsbutton"
-        android:layout_alignLeft="@+id/completedmissionsbutton"
-        android:layout_alignStart="@+id/completedmissionsbutton" />
+        android:layout_above="@+id/dashboardbutton"
+        android:layout_alignLeft="@+id/dashboardbutton"
+        android:layout_alignStart="@+id/dashboardbutton" />
 
     <Button
-        android:id="@+id/completedmissionsbutton"
+        android:id="@+id/dashboardbutton"
 
-        android:text="Completed Missions"
+        android:text="Dashboard"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
 
@@ -58,10 +58,10 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/completedmissionsbutton"
-        android:layout_alignLeft="@+id/completedmissionsbutton"
-        android:layout_alignStart="@+id/completedmissionsbutton" />
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/dashboardbutton"
+        android:layout_alignLeft="@+id/dashboardbutton"
+        android:layout_alignStart="@+id/dashboardbutton" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -124,8 +124,8 @@
         android:layout_alignTop="@+id/textView"
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView"
-        android:layout_marginLeft="27dp"
-        android:layout_marginStart="27dp" />
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp" />
 
     <TextView
         android:layout_width="wrap_content"

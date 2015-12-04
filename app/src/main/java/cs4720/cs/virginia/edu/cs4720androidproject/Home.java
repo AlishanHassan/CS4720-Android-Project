@@ -23,7 +23,7 @@ import java.io.FileInputStream;
 public class Home extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient mGoogleApiClient;
-    private Button cMissionsButton;
+    private Button dashboardButton;
     //private Button settingsButton;
     private Button aboutButton;
     private EditText textField;
@@ -120,11 +120,11 @@ public class Home extends AppCompatActivity implements GoogleApiClient.Connectio
             }
         });
 
-        cMissionsButton = (Button) findViewById(R.id.completedmissionsbutton);
-        cMissionsButton.setOnClickListener(new View.OnClickListener() {
+        dashboardButton = (Button) findViewById(R.id.dashboardbutton);
+        dashboardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, CompletedMissions.class));
+                startActivity(new Intent(Home.this, Dashboard.class));
             }
         });
       //  settingsButton = (Button)findViewById(R.id.settingsButton);

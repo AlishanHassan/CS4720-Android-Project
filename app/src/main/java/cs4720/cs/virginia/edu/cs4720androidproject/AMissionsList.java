@@ -72,6 +72,7 @@ public class AMissionsList extends AppCompatActivity {
     ProgressDialog message;
     //private WeatherDownloader weatherDownloader;
     private JSONObject weatherJSON;
+    public boolean scallywag = false;
 
 
 
@@ -252,13 +253,15 @@ public class AMissionsList extends AppCompatActivity {
                     int check = 0;
                     for (int i = 0; i < 15; i++){
                         if (stuff[i] == position) {
+                            scallywag = true;
                             Toast.makeText(AMissionsList.this,"Stop that you scallywag!", Toast.LENGTH_LONG).show();
                             check = 1;
                             Intent choiceIntent = new Intent(getBaseContext(), Home.class);
                             startActivity(choiceIntent);
                         }
                     }
-                    Toast.makeText(AMissionsList.this, "Mission accomplished", Toast.LENGTH_LONG).show();
+                    if(scallywag == false)
+                        Toast.makeText(AMissionsList.this, "Mission accomplished", Toast.LENGTH_LONG).show();
                     currPoints += points[position];
                     //Toast.makeText(AMissionsList.this, "Total Points: " + currPoints, Toast.LENGTH_LONG).show();
                     FILENAME = "scores_file";
@@ -279,24 +282,29 @@ public class AMissionsList extends AppCompatActivity {
                         for (int i = 0; i < 15; i++){
                             if (stuff[i] != 666){
                                 outStrung = outStrung + stuff[i].toString() + " ";
+                                System.out.println(outStrung);
                             }
                         }
                         outStrung = outStrung + Integer.toString(position) + " ";
                         ofos.write(outStrung.getBytes());
+                        System.out.println("Outstrung getbytes" + outStrung.getBytes());
                         ofos.close();
                     }catch(Exception e) {
                         Log.e("MissionQuest", e.getMessage());
+                        System.out.println("Exception with outStrung, dude");
                     }
                         //StringBuilder builder = new StringBuilder();
                         //int ch;
                         //while ((ch == fis.read()) != 1) {
 
                         //}
-
-                    }
                     Intent choiceIntent = new Intent(getBaseContext(), Home.class);
                     choiceIntent.putExtra("ADDED_POINTS", currPoints);
                     startActivity(choiceIntent);
+                    }
+                    //Intent choiceIntent = new Intent(getBaseContext(), Home.class);
+                    //choiceIntent.putExtra("ADDED_POINTS", currPoints);
+                    //startActivity(choiceIntent);
                 }
 
 
@@ -385,7 +393,7 @@ public class AMissionsList extends AppCompatActivity {
         }
         else {
             System.out.println("conditions not met");
-            Toast.makeText(AMissionsList.this, "YOU FAILED", Toast.LENGTH_LONG).show();
+            Toast.makeText(AMissionsList.this, "Mission Requirements not Met", Toast.LENGTH_LONG).show();
             return false;
         }
 

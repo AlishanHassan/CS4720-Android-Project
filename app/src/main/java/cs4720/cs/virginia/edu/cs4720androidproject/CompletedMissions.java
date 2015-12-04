@@ -39,12 +39,14 @@ public class CompletedMissions extends AppCompatActivity {
         for (int i = 0; i < 15 ; i++){
             stuff[i] = 666;
         }
+
         try {
             FileInputStream fis = openFileInput(FILENAME);
             StringBuilder builder = new StringBuilder();
             int ch;
             while((ch = fis.read()) != -1) {
                 builder.append((char) ch);
+                System.out.println(ch);
             }
             String completed = new String(builder);
             String temp = new String();
