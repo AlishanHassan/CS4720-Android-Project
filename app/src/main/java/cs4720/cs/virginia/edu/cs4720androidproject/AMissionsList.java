@@ -82,7 +82,7 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
     //private WeatherDownloader weatherDownloader;
     private JSONObject weatherJSON;
     public boolean scallywag = false;
-    public int listLength = 18;
+    public int listLength = 19;
     private SensorManager mSensorManager;
     private Sensor mSensor;
     private long lastUpdate = 0;
@@ -113,7 +113,8 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
             "A Trip To The National Mall - 10000 XP",
             "Rock out in the Rice Auditorium - 7000 XP + BONUS ROCKING",
             "Olsson is Dark and Scary. Go Somewhere Happy. - 2000 XP",
-            "Laugh at the Wet Floor Signs As You Head to Web and Mobile - 2500 XP"
+            "Laugh at the Wet Floor Signs As You Head to Web and Mobile - 2500 XP",
+            "Just be yourself. - 789 XP + BONUS ROCKING"
     };
     private int[] points = {1000000,
             1000,
@@ -131,7 +132,9 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
             50000,
             10000,
             7000,
-            2000
+            2000,
+            2500,
+            789
     };
     private String[] missionCoordinates = {"27.9881,86.9253",
             "38.0456989,-78.510402",
@@ -148,6 +151,7 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
             "43.0540984,-79.2277753",
             "37.8199328,-122.4804384",
             "38.8855611,-77.0338853",
+            "38.0314226,-78.5109111",
             "38.0314226,-78.5109111",
             "38.0314226,-78.5109111",
             "38.0314226,-78.5109111"
@@ -169,7 +173,8 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
             "666,NULL",
             "666,NULL",
             "666,NULL",
-            "666,Rain"
+            "666,Rain",
+            "666,NULL"
     };
 
     private String[] missions_description = {"The greatest of the 7 summits. You need to reach the top, while freezing.",
@@ -179,7 +184,7 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
             "Clark is a bit quiet most of the time. Rock your heart away!",
             "A nice mist in your face is required for the ultimate downtown experience.",
             "I'm not sure what it is, either. Ask someone from the College.",
-            "Hell awaits. Tread lightly. Bone chilling temperatures and devastating lightning await.",
+            "Hell awaits. Tread lightly. Bone chilling temperatures and devastating lightning certain.",
             "The weather is just right. Rock away in the stadium.",
             "Anglo influences have crossed the Channel.",
             "The one and the only. It will be an honor.",
@@ -189,7 +194,8 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
             "You're on Maine Street! Check out the Paddle Boats while you're there.",
             "Rice Rocks",
             "There's a tunnel in the basement. At the end is a light.",
-            "It's always raining when we have to go to class, isn't it?"
+            "It's always raining when we have to go to class, isn't it?",
+            "You may be a nobody, but you like it that way."
     };
 
     private int totalScore;
@@ -315,7 +321,7 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
                     }
                     if(scallywag == false)
                         Toast.makeText(AMissionsList.this, "Mission accomplished", Toast.LENGTH_LONG).show();
-                    if(position == 4 || position == 8 || position == 15) {
+                    if(position == 4 || position == 8 || position == 15 || position == 18) {
                         currPoints += (points[position] + (int)speed);
                     }
                     else {
@@ -423,7 +429,7 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
 
 
         try {
-            Thread.sleep(2000);                 //1000 milliseconds is one second.
+            Thread.sleep(1111);                 //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -441,9 +447,10 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
 
         //Toast.makeText(this, latDiff + " " + longDiff, Toast.LENGTH_LONG).show();
 
-        if((latDiff <= .0005 && latDiff >= -.0005) && (longDiff <= .0005 && longDiff >= -.0005)
+        if(((latDiff <= .0005 && latDiff >= -.0005) && (longDiff <= .0005 && longDiff >= -.0005)
                 && (missionTemp == theTemp || missionTemp == 666)
-              && (missionCond.equals(theConditions) || missionCond.equals("NULL"))
+              && (missionCond.equals(theConditions) || missionCond.equals("NULL")))
+                || missionNumber == 18
                 )
         {
             System.out.println("conditions met!");
@@ -632,6 +639,10 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
                         JSONObject current_observation = jsonObject.getJSONObject("current_observation");
                         temperature = current_observation.getString(TEMP_F);
                         condition = current_observation.getString(CONDITION);
+                        if (condition.length() == 0)
+                        {
+                            condition = "Uncharted";
+                        }
                         weatherString = temperature + "," + condition;
 
                         System.out.println(weatherString);

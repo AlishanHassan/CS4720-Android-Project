@@ -1,5 +1,6 @@
 package cs4720.cs.virginia.edu.cs4720androidproject;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.math.*;
 
@@ -33,31 +35,33 @@ public class Dashboard extends AppCompatActivity {
     public static double latitude;
     public static double longitude;
     public String coordinates;
-    private static TextView latitudeView, longitudeView, temperatureView, conditionsView, closestMissionView;
-
+    private static TextView currentLocationView, conditionsView, closestMissionView;
+    private static ImageView weatherIcon;
+    public Drawable conditionImage;
     public static final String CONDITION = "weather";
     public static final String TEMP_F = "temp_f";
     public static final String TEMP_C = "temp_c";
+    public static final String ICON_URL = "icon_url";
     public String weatherString = "test";
 
-    private String[] missions_list = {"Scale Mount Everest without Freezing too Badly - 1000000 XP",
-            "Protect your Bagels from the Rain - 1000 XP",
-            "Pick Apples - 5000 XP",
-            "Visit the Rotunda - 2000 XP",
-            "Attend Class in Clark - 1000 XP + BONUS ROCKING",
-            "Go Downtown - 3000 XP",
-            "Check Out the Fralin - 3000 XP",
-            "Head to Tech as Armageddon Rises - 1 XP",
-            "It's a Nice Day to Watch a Football Game - 2000 XP + BONUS ROCKING",
-            "See the Mona Lisa in Typical British Weather- 100000 XP",
-            "Rain or Shine, Meet THE Professor Sherriff - 5000000 XP",
-            "On a day hotter than Death Valley, Tour Monticello - 5000 XP",
-            "On a bright Canadian Day, See Niagara Falls - 20000 XP",
-            "The Golden Gate Bridge? - 50000 XP",
-            "A Trip To The National Mall - 10000 XP",
-            "Rock out in the Rice Auditorium - 7000 XP + BONUS ROCKING",
-            "Olsson is Dark and Scary. Go Somewhere Happy. - 2000 XP",
-            "Laugh at the Wet Floor Signs As You Head to Web and Mobile - 2500 XP"
+    private String[] missions_list = {"Scale Mount Everest without Freezing too Badly",
+            "Protect your Bagels from the Rain",
+            "Pick Apples",
+            "Visit the Rotunda",
+            "Attend Class in Clark",
+            "Go Downtown",
+            "Check Out the Fralin",
+            "Head to Tech as Armageddon Rises",
+            "It's a Nice Day to Watch a Football Game",
+            "See the Mona Lisa in Typical British Weather",
+            "Rain or Shine, Meet THE Professor Sherriff",
+            "On a day hotter than Death Valley, Tour Monticello",
+            "On a bright Canadian Day, See Niagara Falls",
+            "The Golden Gate Bridge?",
+            "A Trip To The National Mall",
+            "Rock out in the Rice Auditorium",
+            "Olsson is Dark and Scary. Go Somewhere Happy.",
+            "Laugh at the Wet Floor Signs As You Head to Web and Mobile"
     };
 
     private String[] missionCoordinates = {"27.9881,86.9253",
@@ -85,20 +89,20 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+
         coordinates = Home.getCoordinates();
         String[] currCoordinateSplit = coordinates.split(",");
         latitude = Double.parseDouble(currCoordinateSplit[0]);
         longitude = Double.parseDouble(currCoordinateSplit[1]);
-        latitudeView = (TextView) findViewById(R.id.latitudeView);
-        longitudeView = (TextView) findViewById(R.id.longitudeView);
-        latitudeView.setText("" + latitude);
-        longitudeView.setText("" + longitude);
 
-        temperatureView = (TextView) findViewById(R.id.temperatureView);
+        currentLocationView = (TextView) findViewById(R.id.currentLocationView);
         conditionsView = (TextView) findViewById(R.id.conditionsView);
+        closestMissionView = (TextView) findViewById(R.id.closestMissionView);
+        weatherIcon = (ImageView) findViewById(R.id.weatherIcon);
+
         getWeatherFromInterenet(latitude + "," + longitude);
         try {
-            Thread.sleep(1000);                 //1000 milliseconds is one second.
+            Thread.sleep(1800);                 //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -107,9 +111,15 @@ public class Dashboard extends AppCompatActivity {
         double theFTemp = Double.parseDouble(weatherData[0]);
         double theCTemp = Double.parseDouble(weatherData[1]);
         String theConditions = weatherData[2];
+        if (theConditions.length() == 0)
+        {
+            theConditions = "Uncharted";
+        }
+        String fullLocation = weatherData[4] + "," + weatherData[5];
+        currentLocationView.setText(fullLocation + " at " + latitude + ", " + longitude);
+        conditionsView.setText(theFTemp + "°F / " + theCTemp + "°C" + " and " + theConditions + "   ");
 
-        temperatureView.setText(theFTemp + "°F / " + theCTemp + "°C");
-        conditionsView.setText(theConditions);
+
         int closestMission = 0;
         double tempDistance = 6666666666666.0;
         for (int i = 0; i < 18; i++)
@@ -126,9 +136,9 @@ public class Dashboard extends AppCompatActivity {
             }
         }
 
-        closestMissionView = (TextView) findViewById(R.id.closestMissionView);
         closestMissionView.setText(missions_list[closestMission]);
         System.out.println(missions_list[closestMission]);
+
 
 
 
@@ -163,7 +173,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String temperatureF = "", temperatureC = "", condition = "";
+                    String temperatureF = "", temperatureC = "", condition = "", iconURL = "", fullLocation = "";
                     URL url;
                     try {
                         System.out.println("Location: " + location);
@@ -187,9 +197,18 @@ public class Dashboard extends AppCompatActivity {
                         temperatureF = current_observation.getString(TEMP_F);
                         temperatureC = current_observation.getString(TEMP_C);
                         condition = current_observation.getString(CONDITION);
-                        weatherString = temperatureF + "," + temperatureC + "," + condition;
+                        iconURL = current_observation.getString(ICON_URL);
+                        fullLocation = current_observation.getString("display_location");
+                        String[] fullLocationSplit = fullLocation.split("\"");
+                        System.out.println("full location: " + fullLocationSplit[3]);
+                        weatherString = temperatureF + "," + temperatureC + "," + condition + "," + iconURL + "," + fullLocationSplit[3];
+
 
                         System.out.println(weatherString);
+
+                        Drawable image = ImageOperations(iconURL, "weatherIcon.gif");
+                        weatherIcon.setImageDrawable(image);
+
                     }
                     catch (JSONException | IOException e) {
                         e.printStackTrace();
@@ -206,6 +225,25 @@ public class Dashboard extends AppCompatActivity {
 
         thread.start();
 
+    }
+
+
+    private Drawable ImageOperations(String url, String saveFilename) {
+        try {
+            InputStream is = (InputStream) this.fetch(url);
+            Drawable d = Drawable.createFromStream(is, "src");
+            return d;
+        } catch (MalformedURLException e) {
+            return null;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public Object fetch(String address) throws MalformedURLException,IOException {
+        URL url = new URL(address);
+        Object content = url.getContent();
+        return content;
     }
 
 
