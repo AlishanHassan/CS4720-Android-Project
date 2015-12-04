@@ -2,6 +2,10 @@ package cs4720.cs.virginia.edu.cs4720androidproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,7 +56,12 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class AMissionsList extends AppCompatActivity {
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.net.Uri;
+import android.app.Activity;
+
+public class AMissionsList extends AppCompatActivity implements SensorEventListener {
 
 
     public static final String WUNDERGROUND_API_KEY = "4d7b89426d7d4eb2";
@@ -73,7 +82,13 @@ public class AMissionsList extends AppCompatActivity {
     //private WeatherDownloader weatherDownloader;
     private JSONObject weatherJSON;
     public boolean scallywag = false;
-
+    public int listLength = 18;
+    private SensorManager mSensorManager;
+    private Sensor mSensor;
+    private long lastUpdate = 0;
+    private float last_x, last_y, last_z;
+    private static final int SHAKE_THRESHOLD = 612;
+    public float speed;
 
 
 
@@ -84,17 +99,21 @@ public class AMissionsList extends AppCompatActivity {
             "Protect your Bagels from the Rain - 1000 XP",
             "Pick Apples - 5000 XP",
             "Visit the Rotunda - 2000 XP",
-            "Attend Class in Clark - 1000 XP",
+            "Attend Class in Clark - 1000 XP + BONUS ROCKING",
             "Go Downtown - 3000 XP",
             "Check Out the Fralin - 3000 XP",
             "Head to Tech as Armageddon Rises - 1 XP",
-            "It's a Nice Day to Watch a Football Game - 2000 XP",
+            "It's a Nice Day to Watch a Football Game - 2000 XP + BONUS ROCKING",
             "See the Mona Lisa in Typical British Weather- 100000 XP",
             "Rain or Shine, Meet THE Professor Sherriff - 5000000 XP",
             "On a day hotter than Death Valley, Tour Monticello - 5000 XP",
             "On a bright Canadian Day, See Niagara Falls - 20000 XP",
             "The Golden Gate Bridge? - 50000 XP",
-            "A Trip To The National Mall - 10000 XP"};
+            "A Trip To The National Mall - 10000 XP",
+            "Rock out in the Rice Auditorium - 7000 XP + BONUS ROCKING",
+            "Olsson is Dark and Scary. Go Somewhere Happy. - 2000 XP",
+            "Laugh at the Wet Floor Signs As You Head to Web and Mobile - 2500 XP"
+    };
     private int[] points = {1000000,
             1000,
             5000,
@@ -109,7 +128,9 @@ public class AMissionsList extends AppCompatActivity {
             5000,
             20000,
             50000,
-            10000
+            10000,
+            7000,
+            2000
     };
     private String[] missionCoordinates = {"27.9881,86.9253",
             "38.0456989,-78.510402",
@@ -125,7 +146,10 @@ public class AMissionsList extends AppCompatActivity {
             "38.0086085,-78.4553827",
             "43.0540984,-79.2277753",
             "37.8199328,-122.4804384",
-            "38.8855611,-77.0338853"
+            "38.8855611,-77.0338853",
+            "38.0314226,-78.5109111",
+            "38.0314226,-78.5109111",
+            "38.0314226,-78.5109111"
     };
     private String[] missionConditions = {"32,NULL",
             "666,Rain",
@@ -142,7 +166,29 @@ public class AMissionsList extends AppCompatActivity {
             "666,SUNNY",
             "666,NULL",
             "666,NULL",
+            "666,NULL",
+            "666,NULL",
+            "666,Rain"
+    };
 
+    private String[] missions_description = {"The greatest of the 7 summits. You need to reach the top, while freezing.",
+            "Bodo's Bagels are delicious. Protect them on a rainy day.",
+            "Carter's Mountain is a great place to get some pies.",
+            "Yeah, it's not the original, but you should still be able to identify it.",
+            "Clark is a bit quiet most of the time. Rock your heart away!",
+            "A nice mist in your face is required for the ultimate downtown experience.",
+            "I'm not sure what it is, either. Ask someone from the College.",
+            "Hell awaits. Tread lightly. Bone chilling temperatures and devastating lightning await.",
+            "The weather is just right. Rock away in the stadium.",
+            "Anglo influences have crossed the channel.",
+            "The one and the only. It will be an honor.",
+            "Death Valley holds the record for hottest day in America.",
+            "It's a pleasant way to experience the longest border between two countries in the world.",
+            "It opened in 1937. It's probably still there.",
+            "You're on Maine Street! Check out the Paddle Boats while you're there.",
+            "Rice Rocks",
+            "There's a tunnel in the basement. At the end is a light.",
+            "It's always raining when we have to go to class, isn't it?"
     };
 
     private int totalScore;
@@ -161,7 +207,13 @@ public class AMissionsList extends AppCompatActivity {
         setContentView(R.layout.activity_amissions_list);
         missionsView = (ListView) findViewById(R.id.aMissListView);
 
-
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        if (mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).size() != 0) {
+            Sensor accelerometer = mSensorManager.getSensorList(
+                    Sensor.TYPE_ACCELEROMETER).get(0);
+            mSensorManager.registerListener(this, accelerometer,
+                    SensorManager.SENSOR_DELAY_GAME);
+        }
 
         activeMissionsList = new LinkedList<>();
         activeMissionsList.add(new String[]{"Scale Mount Everest", "Reach the top of the world. Stand high and mighty among your peers."});
@@ -169,8 +221,8 @@ public class AMissionsList extends AppCompatActivity {
         String s = Home.getCoordinates();
         String tempPoints = Home.getScore();
         currPoints = Integer.parseInt(tempPoints);
-        Integer[] stuff = new Integer[15];
-        for (int i = 0; i < 15; i++){
+        Integer[] stuff = new Integer[listLength];
+        for (int i = 0; i < listLength; i++){
             stuff[i] = 666;
         }
         String FILENAME = "completed_file";
@@ -199,7 +251,7 @@ public class AMissionsList extends AppCompatActivity {
         }
 
         //Toast.makeText(this, s, Toast.LENGTH_LONG).show();
-        for (int i = 0; i < 15; i++){
+        for (int i = 0; i < listLength; i++){
             if (stuff[i] != 666){
                 missions_list[stuff[i]] = "Completed!";
             }
@@ -219,8 +271,8 @@ public class AMissionsList extends AppCompatActivity {
 
 
                 String value = (String) adapter.getItemAtPosition(position);
-                Integer[] stuff = new Integer[15];
-                for (int i = 0; i < 15; i++){
+                Integer[] stuff = new Integer[listLength];
+                for (int i = 0; i < listLength; i++){
                     stuff[i] = 666;
                 }
                 String FILENAME = "completed_file";
@@ -251,7 +303,7 @@ public class AMissionsList extends AppCompatActivity {
                 //Toast.makeText(this, value, Toast.LENGTH_LONG).show();
                 if(accomplished(position)){
                     int check = 0;
-                    for (int i = 0; i < 15; i++){
+                    for (int i = 0; i < listLength; i++){
                         if (stuff[i] == position) {
                             scallywag = true;
                             Toast.makeText(AMissionsList.this,"Stop that you scallywag!", Toast.LENGTH_LONG).show();
@@ -262,7 +314,12 @@ public class AMissionsList extends AppCompatActivity {
                     }
                     if(scallywag == false)
                         Toast.makeText(AMissionsList.this, "Mission accomplished", Toast.LENGTH_LONG).show();
-                    currPoints += points[position];
+                    if(position == 4 || position == 8 || position == 15) {
+                        currPoints += (points[position] + (int)speed);
+                    }
+                    else {
+                        currPoints += points[position];
+                    }
                     //Toast.makeText(AMissionsList.this, "Total Points: " + currPoints, Toast.LENGTH_LONG).show();
                     FILENAME = "scores_file";
                     String OTHER_FILENAME = "completed_file";
@@ -279,7 +336,7 @@ public class AMissionsList extends AppCompatActivity {
                     try {
                         FileOutputStream ofos = openFileOutput(OTHER_FILENAME, Context.MODE_PRIVATE);
                         String outStrung = "";
-                        for (int i = 0; i < 15; i++){
+                        for (int i = 0; i < listLength; i++){
                             if (stuff[i] != 666){
                                 outStrung = outStrung + stuff[i].toString() + " ";
                                 System.out.println(outStrung);
@@ -393,7 +450,21 @@ public class AMissionsList extends AppCompatActivity {
         }
         else {
             System.out.println("conditions not met");
-            Toast.makeText(AMissionsList.this, "Mission Requirements not Met", Toast.LENGTH_LONG).show();
+            Toast.makeText(AMissionsList.this, "Mission Requirements Not Met", Toast.LENGTH_LONG).show();
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Mission Requirements Unfulfilled")
+                    .setMessage(missions_description[missionNumber])
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+
+
             return false;
         }
 
@@ -581,6 +652,42 @@ public class AMissionsList extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        float x = event.values[0];
+        float y = event.values[1];
+        float z = event.values[2];
+
+
+        //Toast.makeText(this, x + " " + y + " " + z, Toast.LENGTH_LONG).show();
+
+        long curTime = System.currentTimeMillis();
+
+        if ((curTime - lastUpdate) > 100) {
+            long diffTime = (curTime - lastUpdate);
+            lastUpdate = curTime;
+
+            speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
+            }
+
+            last_x = x;
+            last_y = y;
+            last_z = z;
+
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this);
+    }
 
 
     /*

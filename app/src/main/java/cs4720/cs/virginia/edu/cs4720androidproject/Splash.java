@@ -95,6 +95,12 @@ public class Splash extends AppCompatActivity implements SensorEventListener {
                     startActivity(new Intent(Splash.this, Home.class));
                     this.finish();
 
+                    //int daSpeed = (int)speed;
+                    //Intent choiceIntent = new Intent(getBaseContext(), Home.class);
+                    //choiceIntent.putExtra("DA_SPEED", daSpeed);
+                    //startActivity(choiceIntent);
+                    //System.out.println(daSpeed);
+                   // this.finish();
                 }
 
                 last_x = x;
