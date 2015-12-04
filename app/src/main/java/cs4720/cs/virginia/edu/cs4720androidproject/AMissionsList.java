@@ -95,6 +95,7 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
 
 
 
+
     private String[] missions_list = {"Scale Mount Everest without Freezing too Badly - 1000000 XP",
             "Protect your Bagels from the Rain - 1000 XP",
             "Pick Apples - 5000 XP",
@@ -180,7 +181,7 @@ public class AMissionsList extends AppCompatActivity implements SensorEventListe
             "I'm not sure what it is, either. Ask someone from the College.",
             "Hell awaits. Tread lightly. Bone chilling temperatures and devastating lightning await.",
             "The weather is just right. Rock away in the stadium.",
-            "Anglo influences have crossed the channel.",
+            "Anglo influences have crossed the Channel.",
             "The one and the only. It will be an honor.",
             "Death Valley holds the record for hottest day in America.",
             "It's a pleasant way to experience the longest border between two countries in the world.",

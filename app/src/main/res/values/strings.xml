@@ -9,4 +9,7 @@
     <string name="title_activity_amissions_list">Missions List</string>
     <string name="title_activity_completed_missions">CompletedMissions</string>
     <string name="title_activity_dashboard">Dashboard</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

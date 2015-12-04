@@ -15,6 +15,17 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.math.*;
+
 
 public class Dashboard extends AppCompatActivity {
 
@@ -22,7 +33,12 @@ public class Dashboard extends AppCompatActivity {
     public static double latitude;
     public static double longitude;
     public String coordinates;
-    private static TextView latitudeView, longitudeView;
+    private static TextView latitudeView, longitudeView, temperatureView, conditionsView, closestMissionView;
+
+    public static final String CONDITION = "weather";
+    public static final String TEMP_F = "temp_f";
+    public static final String TEMP_C = "temp_c";
+    public String weatherString = "test";
 
     private String[] missions_list = {"Scale Mount Everest without Freezing too Badly - 1000000 XP",
             "Protect your Bagels from the Rain - 1000 XP",
@@ -71,12 +87,49 @@ public class Dashboard extends AppCompatActivity {
 
         coordinates = Home.getCoordinates();
         String[] currCoordinateSplit = coordinates.split(",");
-        double latitude = Double.parseDouble(currCoordinateSplit[0]);
-        double longitude = Double.parseDouble(currCoordinateSplit[1]);
+        latitude = Double.parseDouble(currCoordinateSplit[0]);
+        longitude = Double.parseDouble(currCoordinateSplit[1]);
         latitudeView = (TextView) findViewById(R.id.latitudeView);
         longitudeView = (TextView) findViewById(R.id.longitudeView);
         latitudeView.setText("" + latitude);
         longitudeView.setText("" + longitude);
+
+        temperatureView = (TextView) findViewById(R.id.temperatureView);
+        conditionsView = (TextView) findViewById(R.id.conditionsView);
+        getWeatherFromInterenet(latitude + "," + longitude);
+        try {
+            Thread.sleep(1000);                 //1000 milliseconds is one second.
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+
+        String[] weatherData = weatherString.split(",");
+        double theFTemp = Double.parseDouble(weatherData[0]);
+        double theCTemp = Double.parseDouble(weatherData[1]);
+        String theConditions = weatherData[2];
+
+        temperatureView.setText(theFTemp + "°F / " + theCTemp + "°C");
+        conditionsView.setText(theConditions);
+        int closestMission = 0;
+        double tempDistance = 6666666666666.0;
+        for (int i = 0; i < 18; i++)
+        {
+            String blah = missionCoordinates[i];
+            String[] blahSplit = blah.split(",");
+            double x = Double.parseDouble(blahSplit[0]);
+            double y = Double.parseDouble(blahSplit[1]);
+            double distance = Math.sqrt(Math.abs(((latitude - x) * (latitude - x)) + ((longitude - y) * (longitude - y))));
+            if (distance < tempDistance)
+            {
+                tempDistance = distance;
+                closestMission = i;
+            }
+        }
+
+        closestMissionView = (TextView) findViewById(R.id.closestMissionView);
+        closestMissionView.setText(missions_list[closestMission]);
+        System.out.println(missions_list[closestMission]);
+
 
 
     }
@@ -101,6 +154,58 @@ public class Dashboard extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    void getWeatherFromInterenet(final String location){
+
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    String temperatureF = "", temperatureC = "", condition = "";
+                    URL url;
+                    try {
+                        System.out.println("Location: " + location);
+                        System.out.println("Coordinates " + latitude + "," + longitude);
+
+                        url = new URL("http://api.wunderground.com/api/4d7b89426d7d4eb2/conditions/q/" + latitude + "," + longitude + ".json");
+                        System.out.println("URL: " + url);
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setDoInput(true);
+                        connection.connect();
+                        //wait(2000);
+                        InputStream input = connection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                        String oneLineFromInternet;
+                        String wholeReplyFromInternet = "";
+                        while ((oneLineFromInternet = reader.readLine()) != null) {
+                            wholeReplyFromInternet += oneLineFromInternet + " ";
+                        }
+                        JSONObject jsonObject = new JSONObject(wholeReplyFromInternet);
+                        JSONObject current_observation = jsonObject.getJSONObject("current_observation");
+                        temperatureF = current_observation.getString(TEMP_F);
+                        temperatureC = current_observation.getString(TEMP_C);
+                        condition = current_observation.getString(CONDITION);
+                        weatherString = temperatureF + "," + temperatureC + "," + condition;
+
+                        System.out.println(weatherString);
+                    }
+                    catch (JSONException | IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        });
+
+        thread.start();
+
     }
 
 
